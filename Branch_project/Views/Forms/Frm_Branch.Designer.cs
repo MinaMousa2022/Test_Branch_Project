@@ -57,7 +57,7 @@
             this.ribbon.Name = "ribbon";
             this.ribbon.Pages.AddRange(new DevExpress.XtraBars.Ribbon.RibbonPage[] {
             this.ribbonPage1});
-            this.ribbon.Size = new System.Drawing.Size(949, 151);
+            this.ribbon.Size = new System.Drawing.Size(949, 158);
             this.ribbon.StatusBar = this.ribbonStatusBar;
             // 
             // barButtonItem1
@@ -76,7 +76,7 @@
             // 
             this.Btn_BranchView.Caption = "عرض الفروع";
             this.Btn_BranchView.Id = 3;
-            this.Btn_BranchView.ImageOptions.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("barButtonItem3.ImageOptions.SvgImage")));
+            this.Btn_BranchView.ImageOptions.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("Btn_BranchView.ImageOptions.SvgImage")));
             this.Btn_BranchView.Name = "Btn_BranchView";
             this.Btn_BranchView.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.barButtonItem3_ItemClick);
             // 
@@ -84,7 +84,7 @@
             // 
             this.Btn_AddBranch.Caption = "اضافة فرع";
             this.Btn_AddBranch.Id = 4;
-            this.Btn_AddBranch.ImageOptions.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("barButtonItem4.ImageOptions.SvgImage")));
+            this.Btn_AddBranch.ImageOptions.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("Btn_AddBranch.ImageOptions.SvgImage")));
             this.Btn_AddBranch.Name = "Btn_AddBranch";
             this.Btn_AddBranch.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.barButtonItem4_ItemClick);
             // 
@@ -109,10 +109,10 @@
             // 
             // ribbonStatusBar
             // 
-            this.ribbonStatusBar.Location = new System.Drawing.Point(0, 510);
+            this.ribbonStatusBar.Location = new System.Drawing.Point(0, 507);
             this.ribbonStatusBar.Name = "ribbonStatusBar";
             this.ribbonStatusBar.Ribbon = this.ribbon;
-            this.ribbonStatusBar.Size = new System.Drawing.Size(949, 21);
+            this.ribbonStatusBar.Size = new System.Drawing.Size(949, 24);
             // 
             // Frm_Branch
             // 
@@ -124,8 +124,10 @@
             this.Name = "Frm_Branch";
             this.Ribbon = this.ribbon;
             this.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.StatusBar = this.ribbonStatusBar;
             this.Text = "شاشة الفروع";
+            this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             ((System.ComponentModel.ISupportInitialize)(this.ribbon)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();

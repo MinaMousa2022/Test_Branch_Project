@@ -25,8 +25,36 @@ namespace Branch_project.Logic.Services
             return new Uri("http://goldenoil.dyndns-office.com:818/API/");
         }
 
-       
-   
+        public static DataTable getData(string spName)
+        {
+            DataTable tbl = new DataTable();
+            SqlDataAdapter da;
+            using (SqlConnection connection = getConnectionString())
+            {
+                try
+                {
+                    SqlCommand command = new SqlCommand(spName, connection);
+                    command.CommandType = CommandType.StoredProcedure;
+                    connection.Open();
+
+                    da = new SqlDataAdapter(command);
+                    da.Fill(tbl);
+                    da.Dispose();
+                    connection.Close();
+                }
+                catch (Exception ex)
+                {
+                    connection.Close();
+                    Console.WriteLine(ex.Message);
+                }
+                finally
+                {
+                    connection.Close();
+                }
+            }
+            return tbl;
+        }
+
 
         public static List<T> ExecuteSP<T>(string SPName, List<SqlParameter> Params)
         {
@@ -43,7 +71,10 @@ namespace Branch_project.Logic.Services
                     SqlCommand cmd = new SqlCommand(SPName, Connection);
 
                     // Add parameters
-                    cmd.Parameters.AddRange(Params.ToArray());
+                    if (Params != null)
+                    {
+                        cmd.Parameters.AddRange(Params.ToArray());
+                    }
                     cmd.CommandType = CommandType.StoredProcedure;
 
                     // Make datatable for conversion
