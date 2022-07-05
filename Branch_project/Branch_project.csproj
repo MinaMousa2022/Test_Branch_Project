@@ -73,6 +73,7 @@
   <ItemGroup>
     <Compile Include="Logic\Presenter\BranchViewPresenter.cs" />
     <Compile Include="Logic\Services\DbHelper.cs" />
+    <Compile Include="Logic\Services\FillData.cs" />
     <Compile Include="Models\DbContext.cs" />
     <Compile Include="Models\files_Branch.cs" />
     <Compile Include="Models\files_Curr.cs" />

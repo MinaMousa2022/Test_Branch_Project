@@ -22,9 +22,11 @@ namespace Branch_project.Views.Forms
 
         BranchViewPresenter BranchViewPresenter;
 
+        #region Props
 
-        public string branchName_Txt { get =>  txt_branchName.Text; set => txt_branchName.Text=value; }
-        public string branchEName_Txt { get => txt_branchEName.Text; set => txt_branchEName.Text=value; }
+
+        public string branchName_Txt { get => txt_branchName.Text; set => txt_branchName.Text = value; }
+        public string branchEName_Txt { get => txt_branchEName.Text; set => txt_branchEName.Text = value; }
         public object currid_Txt { get => lkp_Currency.EditValue; set => lkp_Currency.EditValue = value; }
         public string manager_Txt { get => txt_manger.Text; set => txt_manger.Text = value; }
         public string emanager_Txt { get => txt_Emanager.Text; set => txt_Emanager.Text = value; }
@@ -38,9 +40,7 @@ namespace Branch_project.Views.Forms
         public object GridDataSource { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
         public int GridCounts { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
 
-        // public object companyid_Txt { get => lkp_company.EditValue; set => lkp_company.EditValue = value; }
-
-
+        #endregion
 
         public Frm_AddBranch()
         {
@@ -85,6 +85,19 @@ namespace Branch_project.Views.Forms
 
         }
 
+        void lkpCurrencyLoad()
+        {
+
+
+            //Get Currency list from Db
+            var CurrencyList = BranchViewPresenter.GetAllCurrency(lkp_Currency);
+
+           
+            lkp_Currency.AdbptLookupEdit(CurrencyList.Select(x => new { x.currid, x.currname }).ToList(), nameof(files_Curr.currname), nameof(files_Curr.currid));
+          
+
+        }
+
         private void barButtonItem1_ItemClick(object sender, ItemClickEventArgs e)
         {
 
@@ -125,12 +138,8 @@ namespace Branch_project.Views.Forms
         private void Frm_AddBranch_Load(object sender, EventArgs e)
         {
 
-           
 
-
-          BranchViewPresenter.  GetAllCurrency(lkp_Currency);
-
-          
+            lkpCurrencyLoad();
 
 
 

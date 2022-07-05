@@ -1,6 +1,7 @@
     using System;
     using System.Collections.Generic;
-    using System.ComponentModel.DataAnnotations;
+using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
     using System.ComponentModel.DataAnnotations.Schema;
     using System.Data.Entity.Spatial;
 namespace Branch_project.Models
@@ -12,8 +13,9 @@ namespace Branch_project.Models
         public short currid { get; set; }
 
         [Required]
+        [DisplayName("«·⁄„·…")]
         public string currname { get; set; }
-
+        [DisplayName("«·⁄„·…")]
         public string currename { get; set; }
 
         public decimal? currrate { get; set; }

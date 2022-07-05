@@ -21,8 +21,8 @@ namespace Branch_project.Views.Forms
 
         BranchViewPresenter BranchViewPresenter;
 
-
-        public string branchName_Txt { get => txt_branchName.Text; set => txt_branchName.Text=value; }
+        #region
+ public string branchName_Txt { get => txt_branchName.Text; set => txt_branchName.Text=value; }
         public string branchEName_Txt { get => txt_branchEName.Text; set => txt_branchEName.Text=value; }
         public object currid_Txt { get => lkp_Currency.EditValue; set => lkp_Currency.EditValue = value; }
         public string manager_Txt { get => txt_manger.Text; set => txt_manger.Text = value; }
@@ -37,7 +37,22 @@ namespace Branch_project.Views.Forms
         public object GridDataSource { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
 
         public int GridCounts => throw new NotImplementedException();
+        #endregion
 
+
+
+        void lkpCurrencyLoad()
+        {
+
+
+            //Get Currency list from Db
+            var CurrencyList = BranchViewPresenter.GetAllCurrency(lkp_Currency);
+
+
+            lkp_Currency.AdbptLookupEdit(CurrencyList.Select(x => new { x.currid, x.currname }).ToList(), nameof(files_Curr.currname), nameof(files_Curr.currid));
+
+
+        }
         // public object companyid_Txt { get => lkp_company.EditValue; set => lkp_company.EditValue = value; }
 
 
@@ -71,18 +86,17 @@ namespace Branch_project.Views.Forms
         private void Frm_AddBranch_Load(object sender, EventArgs e)
         {
 
-           
+
 
             //Load Currency LookupEdit 
 
-          BranchViewPresenter.  GetAllCurrency(lkp_Currency);
+            lkpCurrencyLoad();
 
-            var List = DbHelper.ExecuteSP<files_Branch>("spGetBranchs", null);
+                  var List = DbHelper.ExecuteSP<files_Branch>("spGetBranchs", null);
 
-         var CurrentBranch =    List.SingleOrDefault(x=>x.branchid== Convert.ToInt32( BranchID));
-
-
-            branchName_Txt = CurrentBranch.branchname;
+            var CurrentBranch =   List.SingleOrDefault(x=>x.branchid== Convert.ToInt32( BranchID));
+           
+               branchName_Txt = CurrentBranch.branchname;
          branchEName_Txt= CurrentBranch.branchename;
             currid_Txt = CurrentBranch.currid;
             manager_Txt  = CurrentBranch.manager;

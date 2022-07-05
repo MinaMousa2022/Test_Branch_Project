@@ -171,17 +171,14 @@ namespace Branch_project.Logic.Presenter
             BranchRepo.GridDataSource = List;
             // gridView1.Columns["files_Curr"].Visible = false;
         }
-        public void GetAllCurrency(LookUpEdit lkp_Currency)
+        public List<files_Curr> GetAllCurrency(LookUpEdit lkp_Currency)
         {
 
 
-            var ss = DbHelper.ExecuteSP<files_Curr>("spSelectCur", null);
-            lkp_Currency.Properties.DataSource = ss;
+            var ListOFCurrency = DbHelper.ExecuteSP<files_Curr>("spSelectCur", null);
 
-            lkp_Currency.Properties.ValueMember = nameof(files_Curr.currid);
-            lkp_Currency.Properties.DisplayMember = nameof(files_Curr.currname);
-            lkp_Currency.Properties.NullText = "[اختر العملة]";
 
+            return ListOFCurrency;
         }
 
         #endregion

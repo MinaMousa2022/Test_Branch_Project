@@ -15,6 +15,7 @@ using Branch_project.Logic.Presenter;
 using Branch_project.Views.InterFaces;
 using DevExpress.XtraEditors.Repository;
 using DevExpress.XtraEditors.Controls;
+using DevExpress.XtraEditors;
 
 namespace Branch_project.Views.Forms
 {
@@ -39,7 +40,7 @@ namespace Branch_project.Views.Forms
 
         public Frm_ShowBranches()
         {
-            InitializeComponent(); 
+            InitializeComponent();
             BranchViewPresenter = new BranchViewPresenter(this);
             BranchViewPresenter.RefreshData();
             gridView1.Columns["branchid"].Visible = false;
@@ -51,35 +52,91 @@ namespace Branch_project.Views.Forms
 
 
 
+
+        void DeleteBranch()
+        {
+
+
+
+
+            SqlConnection Connection = BranchViewPresenter.SQlConnection();
+
+            var Execute = BranchViewPresenter.DeleteBranch(Connection);
+            if (Execute == "Success")
+            {
+                MessageBox.Show("تم حذف الفرع بنجاح");
+            }
+            else { MessageBox.Show(Execute); }
+
+
+            BranchViewPresenter.RefreshData();
+            gridView1.Columns["branchid"].Visible = false;
+            barHeaderItem2.Caption = gridView1.RowCount.ToString();
+
+        }
+
+        void EditBranch()
+        {
+            Frm_EditBranch Frm_EditBranch = new Frm_EditBranch(Convert.ToInt32(BranchID));
+
+            Frm_EditBranch.ShowDialog();
+            BranchViewPresenter.RefreshData();
+            gridView1.Columns["branchid"].Visible = false;
+            barHeaderItem2.Caption = gridView1.RowCount.ToString();
+
+        }
+            
         void AddRepoButtonToGridView()
         {
 
-            RepositoryItemButtonEdit Edit = new RepositoryItemButtonEdit();
-
-            RepositoryItemButtonEdit Delete = new RepositoryItemButtonEdit();
-
-
-
-
-            gridView1.Columns.Add(new DevExpress.XtraGrid.Columns.GridColumn() { FieldName = "MyFieldName", Caption = "MyFieldName", ColumnEdit = Edit, ShowButtonMode = DevExpress.XtraGrid.Views.Base.ShowButtonModeEnum.ShowAlways, VisibleIndex = 100 }) ;
-            gridControl1.RepositoryItems.Add(Edit);
-            gridControl1.RepositoryItems.Add(Delete);
+            RepositoryItemButtonEdit EditRepo = new RepositoryItemButtonEdit();
+            EditRepo.Buttons[0].Kind = ButtonPredefines.Plus;
+            RepositoryItemButtonEdit DeleteRepo = new RepositoryItemButtonEdit();
+            DeleteRepo.Buttons[0].Kind = ButtonPredefines.Delete;
+            EditRepo.Appearance.Options.UseBackColor = true;
+     
 
 
+
+            gridControl1.RepositoryItems.Add(EditRepo);
+            gridControl1.RepositoryItems.Add(DeleteRepo);
+            gridView1.Columns.Add(new DevExpress.XtraGrid.Columns.GridColumn() { Width=44, FieldName = "Delete", Caption = "", ColumnEdit = DeleteRepo, ShowButtonMode = DevExpress.XtraGrid.Views.Base.ShowButtonModeEnum.ShowAlways, VisibleIndex = 100 }) ;
+            gridView1.Columns.Add(new DevExpress.XtraGrid.Columns.GridColumn() { Width = 44, FieldName = "Edit", Caption = "", ColumnEdit = EditRepo, ShowButtonMode = DevExpress.XtraGrid.Views.Base.ShowButtonModeEnum.ShowAlways, VisibleIndex = 101 }) ;
+
+
+
+            gridView1.Columns["Delete"].OptionsColumn.AllowEdit = true;
+            gridView1.Columns["Edit"].OptionsColumn.AllowEdit = true;
+            gridView1.Columns["Delete"].OptionsColumn.ShowCaption = false;
+            gridView1.Columns["Edit"].OptionsColumn.ShowCaption = false;
+            gridView1.Columns["Delete"].Width = 30;
+            gridView1.Columns["Delete"].OptionsColumn.ReadOnly=false;
+            gridView1.Columns["Edit"].Width = 30;
+            
             // gridView1.Columns["MyFieldName"].ColumnEdit = Edit;
-
-            gridView1.OptionsBehavior.Editable = false;
-            Edit.Buttons[0].Kind = ButtonPredefines.Search;
+            files_Branch class1 = new files_Branch();
+            foreach (var item in class1.GetType().GetProperties())
+            {
+                gridView1.Columns[item.Name].OptionsColumn.AllowEdit = false;
+            }
             //Edit.Buttons[1].Kind = ButtonPredefines.Delete;
-            Edit.Click += Edit_Click; ;
-
+            EditRepo.ButtonClick += Edit_ButtonClick;
+            DeleteRepo.ButtonClick += DeleteRepo_ButtonClick;
+            
 
         }
 
-        private void Edit_Click(object sender, EventArgs e)
+        private void DeleteRepo_ButtonClick(object sender, ButtonPressedEventArgs e)
         {
-            MessageBox.Show("Hello");
+            DeleteBranch();
         }
+
+        private void Edit_ButtonClick(object sender, ButtonPressedEventArgs e)
+        {
+            EditBranch();
+        }
+
+     
 
      
 
@@ -96,7 +153,7 @@ namespace Branch_project.Views.Forms
             gridControl1.RepositoryItems.Add(lkp);
             gridView1.Columns["currid"].ColumnEdit = lkp;
 
-            gridView1.OptionsBehavior.Editable = false;
+           // gridView1.OptionsBehavior.Editable = false;
         }
         #endregion
 
@@ -111,6 +168,7 @@ namespace Branch_project.Views.Forms
 
             GridControlSettings();
             AddRepoButtonToGridView();
+          
         }
 
         private void barHeaderItem1_ItemClick(object sender, ItemClickEventArgs e)
@@ -131,37 +189,18 @@ namespace Branch_project.Views.Forms
         }
       
 
+
+
         private void btn_RemoveBranch_ItemClick(object sender, ItemClickEventArgs e)
         {
-            
-
-       
-
-        SqlConnection Connection  =  BranchViewPresenter.SQlConnection();
-
-            var Execute = BranchViewPresenter.DeleteBranch(Connection);
-            if (Execute == "Success")
-            {
-                MessageBox.Show("تم حذف الفرع بنجاح");
-            }
-            else { MessageBox.Show(Execute); }
-
-
-            BranchViewPresenter.RefreshData();
-            gridView1.Columns["branchid"].Visible = false;
-            barHeaderItem2.Caption = gridView1.RowCount.ToString();
+            DeleteBranch();
 
 
         }
 
         private void btn_EditBranch_ItemClick(object sender, ItemClickEventArgs e)
         {
-            Frm_EditBranch Frm_EditBranch = new Frm_EditBranch(Convert.ToInt32( BranchID));
-
-            Frm_EditBranch.ShowDialog();
-            BranchViewPresenter.RefreshData();
-            gridView1.Columns["branchid"].Visible = false;
-            barHeaderItem2.Caption = gridView1.RowCount.ToString();
+            EditBranch();
         }
     }
 }
