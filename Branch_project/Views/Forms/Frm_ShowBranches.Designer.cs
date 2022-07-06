@@ -44,12 +44,15 @@
             this.barDockControlBottom = new DevExpress.XtraBars.BarDockControl();
             this.barDockControlLeft = new DevExpress.XtraBars.BarDockControl();
             this.barDockControlRight = new DevExpress.XtraBars.BarDockControl();
+            this.barEditItem1 = new DevExpress.XtraBars.BarEditItem();
+            this.repositoryItemRatingControl1 = new DevExpress.XtraEditors.Repository.RepositoryItemRatingControl();
             this.layoutControl1 = new DevExpress.XtraLayout.LayoutControl();
             this.gridControl1 = new DevExpress.XtraGrid.GridControl();
             this.gridView1 = new DevExpress.XtraGrid.Views.Grid.GridView();
             this.Root = new DevExpress.XtraLayout.LayoutControlGroup();
             this.layoutControlItem1 = new DevExpress.XtraLayout.LayoutControlItem();
             ((System.ComponentModel.ISupportInitialize)(this.barManager1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.repositoryItemRatingControl1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControl1)).BeginInit();
             this.layoutControl1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gridControl1)).BeginInit();
@@ -75,9 +78,12 @@
             this.btn_RemoveBranch,
             this.btn_AddBranch,
             this.barHeaderItem1,
-            this.barHeaderItem2});
+            this.barHeaderItem2,
+            this.barEditItem1});
             this.barManager1.MainMenu = this.bar2;
-            this.barManager1.MaxItemId = 6;
+            this.barManager1.MaxItemId = 7;
+            this.barManager1.RepositoryItems.AddRange(new DevExpress.XtraEditors.Repository.RepositoryItem[] {
+            this.repositoryItemRatingControl1});
             this.barManager1.StatusBar = this.bar3;
             // 
             // bar1
@@ -149,7 +155,11 @@
             // 
             // barHeaderItem1
             // 
-            this.barHeaderItem1.Appearance.ForeColor = System.Drawing.Color.MintCream;
+            this.barHeaderItem1.Appearance.BackColor = System.Drawing.Color.White;
+            this.barHeaderItem1.Appearance.FontStyleDelta = System.Drawing.FontStyle.Bold;
+            this.barHeaderItem1.Appearance.ForeColor = System.Drawing.Color.Black;
+            this.barHeaderItem1.Appearance.Options.UseBackColor = true;
+            this.barHeaderItem1.Appearance.Options.UseFont = true;
             this.barHeaderItem1.Appearance.Options.UseForeColor = true;
             this.barHeaderItem1.Caption = "العدد";
             this.barHeaderItem1.Id = 4;
@@ -159,6 +169,8 @@
             // 
             // barHeaderItem2
             // 
+            this.barHeaderItem2.Appearance.BackColor = System.Drawing.Color.Black;
+            this.barHeaderItem2.Appearance.Options.UseBackColor = true;
             this.barHeaderItem2.Caption = "0";
             this.barHeaderItem2.Id = 5;
             this.barHeaderItem2.Name = "barHeaderItem2";
@@ -194,6 +206,18 @@
             this.barDockControlRight.Location = new System.Drawing.Point(1074, 45);
             this.barDockControlRight.Manager = this.barManager1;
             this.barDockControlRight.Size = new System.Drawing.Size(0, 537);
+            // 
+            // barEditItem1
+            // 
+            this.barEditItem1.Caption = "barEditItem1";
+            this.barEditItem1.Edit = this.repositoryItemRatingControl1;
+            this.barEditItem1.Id = 6;
+            this.barEditItem1.Name = "barEditItem1";
+            // 
+            // repositoryItemRatingControl1
+            // 
+            this.repositoryItemRatingControl1.AutoHeight = false;
+            this.repositoryItemRatingControl1.Name = "repositoryItemRatingControl1";
             // 
             // layoutControl1
             // 
@@ -259,6 +283,7 @@
             this.Text = "عرض الفروع";
             this.Load += new System.EventHandler(this.Frm_ShowBranches_Load);
             ((System.ComponentModel.ISupportInitialize)(this.barManager1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.repositoryItemRatingControl1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControl1)).EndInit();
             this.layoutControl1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.gridControl1)).EndInit();
@@ -291,5 +316,7 @@
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem1;
         private DevExpress.XtraBars.BarHeaderItem barHeaderItem1;
         private DevExpress.XtraBars.BarHeaderItem barHeaderItem2;
+        private DevExpress.XtraBars.BarEditItem barEditItem1;
+        private DevExpress.XtraEditors.Repository.RepositoryItemRatingControl repositoryItemRatingControl1;
     }
 }

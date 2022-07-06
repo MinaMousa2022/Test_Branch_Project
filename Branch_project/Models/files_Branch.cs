@@ -57,6 +57,7 @@ namespace Branch_project.Models
         [DisplayName("«·‘—ﬂ…")]
         public short? companyid { get; set; }
 
+
        
     }
 }

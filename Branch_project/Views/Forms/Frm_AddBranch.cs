@@ -14,6 +14,7 @@ using System.Data.SqlClient;
 using Branch_project.Models;
 using Branch_project.Logic.Services;
 using DevExpress.XtraEditors;
+using DevExpress.XtraLayout;
 
 namespace Branch_project.Views.Forms
 {
@@ -145,19 +146,41 @@ namespace Branch_project.Views.Forms
 
         }
 
+        void ResetData()
+        {
+            foreach (var item in this.Controls)
+            {
+              
+                 if (item is LayoutControl)
+                {
+                    var data = ((LayoutControl)item).Controls;
+                    LayoutData(data);
+                }
+            }
+        }
+        void LayoutData(Control.ControlCollection control)
+        {
+            foreach (var item in control)
+            {
+                if (item is TextEdit)
+                {
+
+                    ((TextEdit)item).Text = "";
+
+
+                }
+            }
+        }
+            
+
         private void barButtonItem2_ItemClick(object sender, ItemClickEventArgs e)
         {
-            txt_address.Text = "";
-            txt_branchEName.Text = "";
-            txt_branchName.Text = "";
-            txt_Eaddress.Text = "";
-            txt_Email.Text = "";
-            txt_Emanager.Text = "";
-            txt_fax.Text = "";
-            txt_manger.Text="";
-            txt_Phone1.Text = "";
-            txt_phone2.Text = "";
+            ResetData();
+
+           
+            lkp_Currency.EditValue = null;
             lkp_Currency.Properties.NullText = "[اختر العملة]";
+          
 
             
         }

@@ -10,6 +10,8 @@ using System.Windows.Forms;
 using DevExpress.XtraBars;
 using System.Data.SqlClient;
 using Branch_project.Logic.Services;
+using Branch_project.Models;
+using Branch_project.Views.Reports;
 
 namespace Branch_project.Views.Forms
 {
@@ -49,6 +51,29 @@ namespace Branch_project.Views.Forms
 
 
 
+        }
+
+        private void barButtonItem3_ItemClick_1(object sender, ItemClickEventArgs e)
+        {
+            //Frm_Report frm_Report = new Frm_Report();
+            //frm_Report.ShowDialog();
+
+            //List<files_Branch> ListItem;
+
+            //ListItem = DbHelper.ExecuteSP<files_Branch>("spGetBranchs", null);
+            List<File_Branch_view> ListItem;
+
+            ListItem = DbHelper.ExecuteSP<File_Branch_view>("spvm_Branch", null);
+
+
+            XtraReport1.Print(ListItem);
+
+        }
+
+        private void barButtonItem4_ItemClick_1(object sender, ItemClickEventArgs e)
+        {
+            XtraReport1 report1 = new XtraReport1();
+            new frm_ReportDesigner(report1).ShowDialog();
         }
     }
 }
